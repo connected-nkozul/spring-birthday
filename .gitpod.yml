@@ -1,6 +1,16 @@
 image:
   file: .gitpod/Dockerfile
-      
+   
+tasks:
+  - name: Create DB Schema
+    init: > 
+      mysql < data.schema.sql && 
+      gp sync-done schema
+
+  - name: Spring
+    init: >
+      ./gradlew bootRun -x test &&
+      gp sync-await schema
 
 # exposed ports
 ports:
