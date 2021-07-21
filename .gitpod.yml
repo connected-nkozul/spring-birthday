@@ -8,20 +8,12 @@ tasks:
       gp sync-done schema
 
   - name: Spring
-    init: >
-      ./gradlew bootRun -x test &&
-      gp sync-await schema
+    init: gp sync-await schema
+    command: ./gradlew bootRun -x test 
 
-  - name: Dump Chart Data
-    init: >
-      mysql < data/chart.sql &&
-      gp sync-await schema && 
-      gp sync-done dump_chart
-
-  - name: Dump Hit Data
-    init: >
-      mysql < data/hit.sql && 
-      gp sync-await dump_chart
+  - name: Import Data
+    init: gp sync-await schema
+    command: mysql < data/chart.sql && mysql < data/hit.sql   
 
 # exposed ports
 ports:
