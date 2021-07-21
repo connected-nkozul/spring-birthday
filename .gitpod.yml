@@ -12,6 +12,17 @@ tasks:
       ./gradlew bootRun -x test &&
       gp sync-await schema
 
+  - name: Dump Chart Data
+    init: >
+      mysql < data/chart.sql &&
+      gp sync-await schema && 
+      gp sync-done dump_chart
+
+  - name: Dump Hit Data
+    init: >
+      mysql < data/hit.sql && 
+      gp sync-await dump_chart
+
 # exposed ports
 ports:
 - port: 8080
