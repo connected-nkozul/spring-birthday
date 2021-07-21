@@ -2,18 +2,13 @@ image:
   file: .gitpod/Dockerfile
    
 tasks:
-  - name: Create DB Schema
+  - name: Do stuff \o/
     init: > 
+      while ! (mysqladmin ping 2> /dev/null); do sleep 2; echo 'Waiting for mySQL... sit tight!'; done && 
       mysql < data/schema.sql && 
-      gp sync-done schema
-
-  - name: Spring
-    init: gp sync-await schema
-    command: ./gradlew bootRun -x test 
-
-  - name: Import Data
-    init: gp sync-await schema
-    command: mysql < data/chart.sql && mysql < data/hit.sql   
+      mysql < data/chart.sql && 
+      mysql < data/hit.sql &&
+      ./gradlew bootRun -x test 
 
 # exposed ports
 ports:
