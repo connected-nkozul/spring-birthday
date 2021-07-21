@@ -4,7 +4,7 @@ image:
 tasks:
   - name: Create DB Schema
     init: > 
-      mysql < data.schema.sql && 
+      mysql < data/schema.sql && 
       gp sync-done schema
 
   - name: Spring
