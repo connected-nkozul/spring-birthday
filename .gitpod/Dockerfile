@@ -1,4 +1,5 @@
 FROM gitpod/workspace-mysql
+ENV NGINX_DOCROOT_IN_REPO="src/www"
 
 # add your tools here ...
 RUN sudo apt-get update
