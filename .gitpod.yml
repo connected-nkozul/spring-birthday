@@ -4,7 +4,8 @@ image:
 tasks:
   - name: Do stuff \o/
     init: > 
-      service start nginx
+      cp -f .gitpod/nginx/nginx.conf /etc/nginx/nginx.conf &&
+      service start nginx && 
       while ! (mysqladmin ping 2> /dev/null); do sleep 2; echo 'Waiting for mySQL... sit tight!'; done && 
       mysql < data/schema.sql && 
       mysql < data/chart.sql && 
