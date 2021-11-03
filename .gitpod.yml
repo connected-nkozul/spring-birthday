@@ -4,6 +4,7 @@ image:
 tasks:
   - name: Do stuff \o/
     init: > 
+      service start nginx
       while ! (mysqladmin ping 2> /dev/null); do sleep 2; echo 'Waiting for mySQL... sit tight!'; done && 
       mysql < data/schema.sql && 
       mysql < data/chart.sql && 
@@ -13,6 +14,8 @@ tasks:
 # exposed ports
 ports:
 - port: 8080
+  onOpen: open-preview
+- port: 8082
   onOpen: open-preview
 
 vscode:
